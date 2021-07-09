@@ -72,7 +72,7 @@ course   = 0.
 try:
     while True:
         data = uas_id_payload(bytes(30), pos, alt, height, speed, course, home)
-        dynamic_ap.stdin.write(data.hex() + '\n')
+        dynamic_ap.stdin.write(data.hex().encode() + b'\n')
         time.sleep(0.2)
 
         pos    = (pos[0] + 0.00001, pos[1] + 0.00001)
