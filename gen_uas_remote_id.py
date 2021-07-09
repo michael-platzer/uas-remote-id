@@ -28,8 +28,8 @@ def uas_id_payload(uas_id, pos, alt, height, speed, course, home):
     # format the UAS remote ID payload according to french regulation:
     # https://www.legifrance.gouv.fr/eli/arrete/2019/12/27/ECOI1934044A/jo/texte
 
-    pos  = (pos [0] * 10000, pos [1] * 10000)
-    home = (home[0] * 10000, home[1] * 10000)
+    pos  = (pos [0] * 100000, pos [1] * 100000)
+    home = (home[0] * 100000, home[1] * 100000)
     payload = bytearray([
         0x6a, 0x5c, 0x35,   # OUI
         0x01                # VS types
