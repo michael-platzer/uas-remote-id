@@ -17,6 +17,8 @@ parser.add_argument('-s', '--ssid', metavar='SSID', default='test',
 parser.add_argument('-c', '--conf', metavar='hostapd.conf',
                     default='/etc/hostapd/hostapd.conf',
                     help='Alternative location for hostapd.conf file')
+parser.add_argument('-d', '--debug', action='store_true',
+                    help='Print debug info')
 parser.add_argument('mode', metavar="MODE",
                     help='Beacon mode: transmit beacons with additional '
                          'information sent in the vendor specific payload '
@@ -79,7 +81,8 @@ try:
         # start hostapd or trigger reconfiguration in case it already runs
         # http://lists.infradead.org/pipermail/hostap/2017-October/038000.html
         if hostapd is None:
-            hostapd = subprocess.Popen(['hostapd', args.conf])
+            arguments = (['-dd'] if args.debug else []) + [args.conf]
+            hostapd   = subprocess.Popen(['hostapd'] + arguments)
         else:
             hostapd.send_signal(signal.SIGHUP)
 except:
